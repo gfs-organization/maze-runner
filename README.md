@@ -17,7 +17,7 @@ open space, you have moved to that space. If you hit "Exit" you are done, and yo
 your Secret Code.
 
 Become a Runner in the Maze by sending a PUT request to:
-https://gfs-maze-runner.herokuapp.com/{level}
+https://gfs-maze-runner.herokuapp.com/mazerunner/{level}
 
 with JSON body: ["E", "S", "N", "W"]
 

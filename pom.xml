@@ -57,6 +57,9 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>**/*.txt</include>
+                    <include>**/*.html</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
                 </includes>
             </resource>
         </resources>
