@@ -8,14 +8,15 @@ import static com.example.mazerunner.parts.MazeSpace.EXIT;
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -38,9 +39,10 @@ public class MazeMaster {
     private String successMessage;
 
     public MazeMaster(final String commandFileName) throws IOException, URISyntaxException {
-        final File files = new ClassPathResource(commandFileName).getFile();
-        final Path path = files.toPath();
-        final List<String> rows = Files.lines(path).collect(Collectors.toList());
+
+        final InputStream inputStream = new ClassPathResource(commandFileName).getInputStream();
+        final Stream<String> lines = new BufferedReader(new InputStreamReader(inputStream)).lines();
+        final List<String> rows = lines.collect(Collectors.toList());
 
         mazeTitle = rows.get(0);
         successMessage = rows.get(1);
