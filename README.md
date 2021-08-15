@@ -16,7 +16,10 @@ Each set of directions will return a String indicating you have hit a "Wall" or 
 open space, you have moved to that space. If you hit "Exit" you are done, and you will receive a success message with
 your Secret Code.
 
-Become a Runner in the Maze by sending a PUT request to
+Become a Runner in the Maze by sending a PUT request to:
+https://gfs-maze-runner.herokuapp.com/{level}
+
+with JSON body: ["E", "S", "N", "W"]
 
 There are 4 levels to this maze (1, 2, 3, 4). You may submit your solution to each as you find them. Please submit your
 directions through the maze, plus your secret code for each maze.
@@ -25,7 +28,6 @@ Things to consider:
 
 1. The exit can be anywhere in the grid. Even the middle.
 2. The grid is not necessarily a square. (Could be a rectangle. Won't be a triangle or a circle.)
-
-Example:
+3. You can use Postman or SoapUI to test submissions and responses.
 
 
