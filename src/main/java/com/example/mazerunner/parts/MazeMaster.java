@@ -8,16 +8,23 @@ import static com.example.mazerunner.parts.MazeSpace.EXIT;
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
+
 public class MazeMaster {
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     private List<char[]> mazeMap;
     private int maxRowIndex;
@@ -31,7 +38,8 @@ public class MazeMaster {
     private String successMessage;
 
     public MazeMaster(final String commandFileName) throws IOException, URISyntaxException {
-        final Path path = Paths.get(getClass().getClassLoader().getResource(commandFileName).toURI());
+        final File files = new ClassPathResource(commandFileName).getFile();
+        final Path path = files.toPath();
         final List<String> rows = Files.lines(path).collect(Collectors.toList());
 
         mazeTitle = rows.get(0);
