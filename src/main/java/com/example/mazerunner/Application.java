@@ -36,4 +36,9 @@ public class Application {
         return new MazeMaster("theCurl.txt");
     }
 
+    @Bean
+    public MazeMaster levelFiveMazeMaster() throws IOException, URISyntaxException {
+        return new MazeMaster("theDoubleBack.txt");
+    }
+
 }
