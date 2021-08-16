@@ -26,7 +26,7 @@ public class MazeRunner {
         MazeSpace lastSpace = OPEN_SPACE;
 
         for (final String direction : directions) {
-            System.out.println(direction);
+            //            System.out.println(direction);
             lastSpace = mazeMaster.step(direction, coordinates);
             if (lastSpace == WALL) {
                 return WALL.getLongDescription();

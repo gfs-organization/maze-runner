@@ -12,46 +12,45 @@
 </div>
 <div class="d-grid gap-3">
     <div class="p-2">
-        You have been dropped in a maze of unknown size and must find the exit. The maze is laid out in a grid pattern. You
-        will always start in the Northeast corner of the maze (position 0,0 of a grid). Your goal is to map the shortest
-        path through the maze by collecting directional coordinates at each step. You will take a step by calling one of
-        four methods on the MazeMaster object:
+        You have been dropped in a maze of unknown size and must find the exit. The maze is laid out in a grid pattern. You will
+        always start in the NorthWest corner of the maze (position 0,0 of the grid). Your goal is to map the shortest path
+        through the maze by sending directional coordinates for each step. You will take steps by passing in an array of
+        Strings, where each item in the array is one of 4 cardinal direction points: N, S, E, W.
     </div>
     <div class="p-w">
         <ul>
-            <li>stepNorth() (North is at the top of the grid)</li>
-            <li>stepSouth() (South is at the bottom of the grid)</li>
-            <li>stepEast() (If you can't figure out where East is now, don't start this challenge.)</li>
-            <li>stepWest() (See the directions for East.)</li>
+            <li>N will take 1 step towards the top of the grid.</li>
+            <li>S will take 1 step towards the bottom of the grid.</li>
+            <li>E will... (If you can't figure out where East is now, don't start this challenge.)</li>
+            <li>W (See the directions for East.)</li>
         </ul>
     </div>
     <div class="p-2">
-        Each method will return a String indicating "Wall" or "Open Space" or "Exit". If you have hit a wall, you do not move.
-        If you hit an open space, you have moved to that space. If you hit "Exit" you are done. Your solution should return a
-        comma delimited string of your steps (e.g. N,S,E,W,W,E,N).
+        Each set of directions will return a String indicating you have hit a "Wall" or "Open Space" or "Exit". If you hit an
+        open space, you have moved to that space. If you hit "Exit" you are done, and you will receive a success message with
+        your Secret Code.
+    </div>
+    <div class="p-2">
+        Become a Runner in the Maze by sending a PUT request to:
+        </br></br>https://gfs-maze-runner.herokuapp.com/mazerunner/{level}
+        </br>with JSON body: ["E", "S", "N", "W"]
+    </div>
+    <div class="p-2">
+        There are 4 levels to this maze (1, 2, 3, 4).
+        </br></br>You may submit your solution to each level as you find it. Please submit your complete list of
+        directions plus your secret code for each maze.
     </div>
     <div class="p-2">
         Things to consider:
         <ol>
             <li>The exit can be anywhere in the grid. Even the middle.</li>
-            <li>The grid is not necessarily a square. (Could be a rectangle. Won't be a triangle or a circle.)</li>
-            <li>In your workspace, you can either implement your own functional MazeMaster, or just mock it out. Only submit your
-                implementation for runTheMaze().
+            <li>The grid is not necessarily a square.</li>
+            <li>You can use Postman or SoapUI to test submissions and responses.
             </li>
         </ol>
     </div>
     <div class="p-2">
-        Example:
-        <ul>
-            <li>stepNorth() -> "Wall"</li>
-            <li>stepEast() -> "Open Space"</li>
-            <li>stepEast() -> "Open Space"</li>
-            <li>stepEast() -> "Wall" // note: you did not move</li>
-            <li>stepSouth() -> "Exit"</li>
-        </ul>
-    </div>
-    <div class="p-2">
-        Your output should be "E,E,S" as the shortest path.
+        Good luck!
     </div>
 </div>
 </body>
