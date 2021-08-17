@@ -26,20 +26,20 @@ public class MazeRunner {
         final Coordinates coordinates = new Coordinates();
 
         MazeSpace lastSpace = OPEN_SPACE;
-
-        for (final String direction : directions) {
-            System.out.println(direction);
-            lastSpace = mazeMaster.step(direction, coordinates);
-            if (lastSpace == WALL) {
-                return WALL.getLongDescription();
+        try {
+            for (final String direction : directions) {
+                lastSpace = mazeMaster.step(direction, coordinates);
+                //                System.out.println(direction);
+                if (lastSpace == WALL) {
+                    return WALL.getLongDescription();
+                }
             }
+        } catch (final FoundExitException e) {
+            return mazeMaster.getSuccessMessage();
         }
 
-        if (lastSpace == OPEN_SPACE) {
-            return OPEN_SPACE.getLongDescription();
-        }
+        return OPEN_SPACE.getLongDescription();
 
-        return mazeMaster.getSuccessMessage();
     }
 
     private MazeMaster chooseTheMaze(final int mazeLevel) {

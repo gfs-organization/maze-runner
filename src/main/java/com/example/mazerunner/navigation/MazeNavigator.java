@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Cell;
 import com.example.mazerunner.parts.Coordinates;
+import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.MazeMaster;
 import com.example.mazerunner.parts.MazeSpace;
 
@@ -22,8 +23,8 @@ public class MazeNavigator {
     @Autowired
     private MazeMaster levelOneMazeMaster;
 
-    public CardinalDirection mapCellsAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells,
-            final Coordinates coordinates) {
+    public CardinalDirection mapCellsAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
+            throws FoundExitException {
 
         if (mapEastAndReturnExit(currentCell, mappedCells, coordinates)) {
             return CardinalDirection.EAST;
@@ -40,7 +41,8 @@ public class MazeNavigator {
         return null;
     }
 
-    private boolean mapEastAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates) {
+    private boolean mapEastAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
+            throws FoundExitException {
         final int currentX = currentCell.getX();
         final int currentY = currentCell.getY();
         final int newX = currentX + 1;
@@ -83,7 +85,8 @@ public class MazeNavigator {
         }
     }
 
-    private boolean mapWestAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates) {
+    private boolean mapWestAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
+            throws FoundExitException {
         final int currentX = currentCell.getX();
         final int currentY = currentCell.getY();
         final int newX = currentX - 1;
@@ -112,7 +115,8 @@ public class MazeNavigator {
         return false;
     }
 
-    private boolean mapSouthAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates) {
+    private boolean mapSouthAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
+            throws FoundExitException {
         final int currentX = currentCell.getX();
         final int currentY = currentCell.getY();
         final int newY = currentY + 1;
@@ -140,7 +144,8 @@ public class MazeNavigator {
         return false;
     }
 
-    private boolean mapNorthAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates) {
+    private boolean mapNorthAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
+            throws FoundExitException {
         final int currentX = currentCell.getX();
         final int currentY = currentCell.getY();
         final int newY = currentY - 1;

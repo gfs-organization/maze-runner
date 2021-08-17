@@ -4,7 +4,6 @@ import static com.example.mazerunner.parts.CardinalDirection.EAST;
 import static com.example.mazerunner.parts.CardinalDirection.NORTH;
 import static com.example.mazerunner.parts.CardinalDirection.SOUTH;
 import static com.example.mazerunner.parts.CardinalDirection.WEST;
-import static com.example.mazerunner.parts.MazeSpace.EXIT;
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;
 
@@ -67,7 +66,7 @@ public class MazeMaster {
         }
     }
 
-    public MazeSpace step(final String direction, final Coordinates coordinates) {
+    public MazeSpace step(final String direction, final Coordinates coordinates) throws FoundExitException {
         if (direction.equals(EAST.getDirection())) {
             return stepEast(coordinates);
         } else if (direction.equals(WEST.getDirection())) {
@@ -81,7 +80,7 @@ public class MazeMaster {
         }
     }
 
-    public MazeSpace stepNorth(final Coordinates coordinates) {
+    public MazeSpace stepNorth(final Coordinates coordinates) throws FoundExitException {
         final int currentRow = coordinates.getRow();
         final int currentColumn = coordinates.getColumn();
 
@@ -96,12 +95,12 @@ public class MazeMaster {
         } else if (newRow[currentColumn] == MAP_WALL) {
             return WALL;
         } else if (newRow[currentColumn] == MAP_EXIT) {
-            return EXIT;
+            throw new FoundExitException("You found the exit.");
         }
         return null;
     }
 
-    public MazeSpace stepSouth(final Coordinates coordinates) {
+    public MazeSpace stepSouth(final Coordinates coordinates) throws FoundExitException {
         final int currentRow = coordinates.getRow();
         final int currentColumn = coordinates.getColumn();
 
@@ -116,12 +115,12 @@ public class MazeMaster {
         } else if (newRow[currentColumn] == MAP_WALL) {
             return WALL;
         } else if (newRow[currentColumn] == MAP_EXIT) {
-            return EXIT;
+            throw new FoundExitException("You found the exit.");
         }
         return null;
     }
 
-    public MazeSpace stepEast(final Coordinates coordinates) {
+    public MazeSpace stepEast(final Coordinates coordinates) throws FoundExitException {
         final int currentRow = coordinates.getRow();
         final int currentColumn = coordinates.getColumn();
         final char[] currentRowCells = mazeMap.get(currentRow);
@@ -138,12 +137,12 @@ public class MazeMaster {
             coordinates.setColumn(newColumn);
             return OPEN_SPACE;
         } else if (currentRowCells[newColumn] == MAP_EXIT) {
-            return EXIT;
+            throw new FoundExitException("You found the exit.");
         }
         return null;
     }
 
-    public MazeSpace stepWest(final Coordinates coordinates) {
+    public MazeSpace stepWest(final Coordinates coordinates) throws FoundExitException {
         final int currentRow = coordinates.getRow();
         final int currentColumn = coordinates.getColumn();
         final char[] currentRowCells = mazeMap.get(currentRow);
@@ -160,7 +159,7 @@ public class MazeMaster {
             coordinates.setColumn(newColumn);
             return OPEN_SPACE;
         } else if (currentRowCells[newColumn] == MAP_EXIT) {
-            return EXIT;
+            throw new FoundExitException("You found the exit.");
         }
         return null;
     }
