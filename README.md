@@ -21,7 +21,7 @@ https://gfs-maze-runner.herokuapp.com/mazerunner/{level}
 
 with JSON body: ["E", "S", "N", "W"]
 
-There are 4 levels to this maze (1, 2, 3, 4).
+There are 5 levels to this maze (1, 2, 3, 4, 5).
 
 You may submit your solution to each as you find them. Please submit your directions through the maze, plus your secret
 code for each maze.
