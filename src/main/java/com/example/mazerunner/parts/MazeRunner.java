@@ -20,16 +20,19 @@ public class MazeRunner {
     private MazeMaster levelFourMazeMaster;
     @Autowired
     private MazeMaster levelFiveMazeMaster;
+    @Autowired
+    private MazeMaster levelSixMazeMaster;
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
         final MazeMaster mazeMaster = chooseTheMaze(mazeLevel);
+        System.out.println("Running the " + mazeMaster.getMazeTitle());
         final Coordinates coordinates = new Coordinates();
 
         MazeSpace lastSpace = OPEN_SPACE;
         try {
             for (final String direction : directions) {
                 lastSpace = mazeMaster.step(direction, coordinates);
-                //                System.out.println(direction);
+                System.out.print("\"" + direction + "\",");
                 if (lastSpace == WALL) {
                     return WALL.getLongDescription();
                 }
@@ -54,6 +57,8 @@ public class MazeRunner {
                 return levelFourMazeMaster;
             case 5:
                 return levelFiveMazeMaster;
+            case 6:
+                return levelSixMazeMaster;
             default:
                 throw new IllegalArgumentException("You did not enter a valid maze level. Please enter 1, 2, 3, or 4.");
         }

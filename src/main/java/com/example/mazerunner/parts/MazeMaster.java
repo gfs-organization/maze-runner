@@ -56,9 +56,9 @@ public class MazeMaster {
         mazeMap = new ArrayList<>(rows.size());
         maxRowIndex = rows.size() - 1;
 
-        System.out.println("Loaded the map:" + mazeTitle);
+        //        System.out.println("Loaded the map:" + mazeTitle);
         for (final String row : rows) {
-            System.out.println(row);
+            //            System.out.println(row);
             final char[] cells = row.toCharArray();
             mazeMap.add(cells);
 
