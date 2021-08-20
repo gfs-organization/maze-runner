@@ -2,6 +2,8 @@ package com.example.mazerunner;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,33 +19,17 @@ public class Application {
     }
 
     @Bean
-    public MazeMaster levelOneMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theSnake.txt");
-    }
+    public List<MazeMaster> mazeMasterList() throws IOException, URISyntaxException {
+        final List<MazeMaster> mazeMasters = new ArrayList<>();
 
-    @Bean
-    public MazeMaster levelTwoMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theTrapper.txt");
-    }
+        mazeMasters.add(new MazeMaster("theSnake.txt"));
+        mazeMasters.add(new MazeMaster("theTrapper.txt"));
+        mazeMasters.add(new MazeMaster("theDrain.txt"));
+        mazeMasters.add(new MazeMaster("theCurl.txt"));
+        mazeMasters.add(new MazeMaster("theDoubleBack.txt"));
+        mazeMasters.add(new MazeMaster("theQuadrupleBypass.txt"));
 
-    @Bean
-    public MazeMaster levelThreeMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theDrain.txt");
-    }
-
-    @Bean
-    public MazeMaster levelFourMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theCurl.txt");
-    }
-
-    @Bean
-    public MazeMaster levelFiveMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theDoubleBack.txt");
-    }
-
-    @Bean
-    public MazeMaster levelSixMazeMaster() throws IOException, URISyntaxException {
-        return new MazeMaster("theQuadrupleBypass.txt");
+        return mazeMasters;
     }
 
 }

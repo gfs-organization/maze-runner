@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Cell;
 import com.example.mazerunner.parts.Coordinates;
@@ -17,11 +14,13 @@ import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.MazeMaster;
 import com.example.mazerunner.parts.MazeSpace;
 
-@Component
 public class MazeNavigator {
 
-    @Autowired
-    private MazeMaster levelOneMazeMaster;
+    private MazeMaster mazeMaster;
+    
+    public MazeNavigator(final MazeMaster mazeMaster) {
+        this.mazeMaster = mazeMaster;
+    }
 
     public CardinalDirection mapCellsAndReturnExit(final Cell currentCell, final Map<Integer, List<Cell>> mappedCells, final Coordinates coordinates)
             throws FoundExitException {
@@ -54,14 +53,14 @@ public class MazeNavigator {
 
         final Cell testCell = new Cell(newX, currentY);
 
-        final MazeSpace mazeSpace = levelOneMazeMaster.stepEast(coordinates);
+        final MazeSpace mazeSpace = mazeMaster.stepEast(coordinates);
         if (mazeSpace == EXIT) {
             testCell.setExit(true);
-            levelOneMazeMaster.stepWest(coordinates);
+            mazeMaster.stepWest(coordinates);
             return true;
         } else if (mazeSpace == OPEN_SPACE) {
             testCell.setOpen(true);
-            levelOneMazeMaster.stepWest(coordinates);
+            mazeMaster.stepWest(coordinates);
         } else {
             testCell.setWall(true);
         }
@@ -98,14 +97,14 @@ public class MazeNavigator {
 
         final Cell testCell = new Cell(newX, currentY);
 
-        final MazeSpace mazeSpace = levelOneMazeMaster.stepWest(coordinates);
+        final MazeSpace mazeSpace = mazeMaster.stepWest(coordinates);
         if (mazeSpace == EXIT) {
             testCell.setExit(true);
-            levelOneMazeMaster.stepEast(coordinates);
+            mazeMaster.stepEast(coordinates);
             return true;
         } else if (mazeSpace == OPEN_SPACE) {
             testCell.setOpen(true);
-            levelOneMazeMaster.stepEast(coordinates);
+            mazeMaster.stepEast(coordinates);
         } else {
             testCell.setWall(true);
         }
@@ -128,14 +127,14 @@ public class MazeNavigator {
 
         final Cell testCell = new Cell(currentX, newY);
 
-        final MazeSpace mazeSpace = levelOneMazeMaster.stepSouth(coordinates);
+        final MazeSpace mazeSpace = mazeMaster.stepSouth(coordinates);
         if (mazeSpace == EXIT) {
             testCell.setExit(true);
-            levelOneMazeMaster.stepNorth(coordinates);
+            mazeMaster.stepNorth(coordinates);
             return true;
         } else if (mazeSpace == OPEN_SPACE) {
             testCell.setOpen(true);
-            levelOneMazeMaster.stepNorth(coordinates);
+            mazeMaster.stepNorth(coordinates);
         } else {
             testCell.setWall(true);
         }
@@ -157,14 +156,14 @@ public class MazeNavigator {
 
         final Cell testCell = new Cell(currentX, newY);
 
-        final MazeSpace mazeSpace = levelOneMazeMaster.stepNorth(coordinates);
+        final MazeSpace mazeSpace = mazeMaster.stepNorth(coordinates);
         if (mazeSpace == EXIT) {
             testCell.setExit(true);
-            levelOneMazeMaster.stepSouth(coordinates);
+            mazeMaster.stepSouth(coordinates);
             return true;
         } else if (mazeSpace == OPEN_SPACE) {
             testCell.setOpen(true);
-            levelOneMazeMaster.stepSouth(coordinates);
+            mazeMaster.stepSouth(coordinates);
         } else {
             testCell.setWall(true);
         }

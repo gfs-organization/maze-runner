@@ -10,17 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.example.mazerunner.navigation.MazeNavigator;
 
-@Component
 public class MazeRunnerOld {
-    @Autowired
-    private MazeMaster levelOneMazeMaster;
-    @Autowired
-    private MazeNavigator mazeNavigator;
+    private final MazeMaster mazeMaster;
+    private final MazeNavigator mazeNavigator;
+
+    public MazeRunnerOld(final MazeMaster mazeMaster, final MazeNavigator mazeNavigator) {
+        this.mazeMaster = mazeMaster;
+        this.mazeNavigator = mazeNavigator;
+    }
 
     public String runTheMaze() {
         final List<String> directions = new ArrayList<>();
@@ -59,7 +58,7 @@ public class MazeRunnerOld {
             throws FoundExitException {
         nextCell = mappedCells.get(nextCell.getY() - 1).get(nextCell.getX());
         while (nextCell.isOpen()) {
-            levelOneMazeMaster.stepNorth(coordinates);
+            mazeMaster.stepNorth(coordinates);
             directions.add(NORTH.getDirection());
 
             mapAndExitCheck(directions, mappedCells, nextCell, coordinates);
@@ -74,7 +73,7 @@ public class MazeRunnerOld {
             throws FoundExitException {
         nextCell = mappedCells.get(nextCell.getY()).get(nextCell.getX() - 1);
         while (nextCell.isOpen()) {
-            levelOneMazeMaster.stepWest(coordinates);
+            mazeMaster.stepWest(coordinates);
             directions.add(WEST.getDirection());
 
             mapAndExitCheck(directions, mappedCells, nextCell, coordinates);
@@ -89,7 +88,7 @@ public class MazeRunnerOld {
             throws FoundExitException {
         nextCell = mappedCells.get(nextCell.getY() + 1).get(nextCell.getX());
         while (nextCell.isOpen()) {
-            levelOneMazeMaster.stepSouth(coordinates);
+            mazeMaster.stepSouth(coordinates);
             directions.add(SOUTH.getDirection());
 
             mapAndExitCheck(directions, mappedCells, nextCell, coordinates);
@@ -104,7 +103,7 @@ public class MazeRunnerOld {
             throws FoundExitException {
         nextCell = mappedCells.get(nextCell.getY()).get(nextCell.getX() + 1);
         while (nextCell.isOpen()) {
-            levelOneMazeMaster.stepEast(coordinates);
+            mazeMaster.stepEast(coordinates);
             directions.add(EAST.getDirection());
 
             mapAndExitCheck(directions, mappedCells, nextCell, coordinates);

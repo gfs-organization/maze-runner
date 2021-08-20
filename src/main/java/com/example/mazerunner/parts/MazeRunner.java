@@ -10,18 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MazeRunner {
+
     @Autowired
-    private MazeMaster levelOneMazeMaster;
-    @Autowired
-    private MazeMaster levelTwoMazeMaster;
-    @Autowired
-    private MazeMaster levelThreeMazeMaster;
-    @Autowired
-    private MazeMaster levelFourMazeMaster;
-    @Autowired
-    private MazeMaster levelFiveMazeMaster;
-    @Autowired
-    private MazeMaster levelSixMazeMaster;
+    private List<MazeMaster> mazeMasterList;
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
         final MazeMaster mazeMaster = chooseTheMaze(mazeLevel);
@@ -46,21 +37,11 @@ public class MazeRunner {
     }
 
     private MazeMaster chooseTheMaze(final int mazeLevel) {
-        switch (mazeLevel) {
-            case 1:
-                return levelOneMazeMaster;
-            case 2:
-                return levelTwoMazeMaster;
-            case 3:
-                return levelThreeMazeMaster;
-            case 4:
-                return levelFourMazeMaster;
-            case 5:
-                return levelFiveMazeMaster;
-            case 6:
-                return levelSixMazeMaster;
-            default:
-                throw new IllegalArgumentException("You did not enter a valid maze level. Please enter 1, 2, 3, or 4.");
+        final int numberOfMazes = mazeMasterList.size();
+        if (mazeLevel < 1 || mazeLevel > numberOfMazes) {
+            throw new IllegalArgumentException("You did not enter a valid maze level. Please a number between 1 and " + numberOfMazes);
         }
+
+        return mazeMasterList.get(mazeLevel - 1);
     }
 }
