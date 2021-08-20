@@ -32,7 +32,7 @@ public class MazeRunner {
         try {
             for (final String direction : directions) {
                 lastSpace = mazeMaster.step(direction, coordinates);
-                System.out.print("\"" + direction + "\",");
+                //                System.out.print("\"" + direction + "\",");
                 if (lastSpace == WALL) {
                     return WALL.getLongDescription();
                 }
