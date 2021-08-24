@@ -39,7 +39,7 @@ public class MazeRunner {
     private MazeMaster chooseTheMaze(final int mazeLevel) {
         final int numberOfMazes = mazeMasterList.size();
         if (mazeLevel < 1 || mazeLevel > numberOfMazes) {
-            throw new IllegalArgumentException("You did not enter a valid maze level. Please a number between 1 and " + numberOfMazes);
+            throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + numberOfMazes);
         }
 
         return mazeMasterList.get(mazeLevel - 1);
