@@ -28,6 +28,7 @@ public class Application {
         mazeMasters.add(new MazeMaster("theCurl.txt"));
         mazeMasters.add(new MazeMaster("theDoubleBack.txt"));
         mazeMasters.add(new MazeMaster("theQuadrupleBypass.txt"));
+        mazeMasters.add(new MazeMaster("theSpellingBee.txt"));
 
         return mazeMasters;
     }
