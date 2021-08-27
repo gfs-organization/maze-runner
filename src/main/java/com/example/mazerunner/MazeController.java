@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.mazerunner.parts.MazeRunner;
+import com.example.mazerunner.navigation.MazeRunner;
 
 @RestController
 @RequestMapping("/mazerunner")

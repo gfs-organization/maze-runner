@@ -1,7 +1,6 @@
 package com.example.mazerunner;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Application {
     }
 
     @Bean
-    public List<MazeMaster> mazeMasterList() throws IOException, URISyntaxException {
+    public List<MazeMaster> mazeMasterList() throws IOException {
         final List<MazeMaster> mazeMasters = new ArrayList<>();
 
         mazeMasters.add(new MazeMaster("theSnake.txt"));
