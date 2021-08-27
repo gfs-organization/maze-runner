@@ -22,8 +22,7 @@ public class MazeRunner {
     private List<MazeMaster> mazeMasterList;
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
-        final MazeMaster mazeMaster = chooseTheMaze(mazeLevel);
-        final Maze maze = mazeMaster.getMaze();
+        final Maze maze = chooseTheMaze(mazeLevel);
 
         System.out.println("Running the " + maze.getMazeTitle());
         final Coordinates coordinates = new Coordinates();
@@ -46,12 +45,12 @@ public class MazeRunner {
 
     }
 
-    private MazeMaster chooseTheMaze(final int mazeLevel) {
+    private Maze chooseTheMaze(final int mazeLevel) {
         final int numberOfMazes = mazeMasterList.size();
         if (mazeLevel < 1 || mazeLevel > numberOfMazes) {
             throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + numberOfMazes);
         }
 
-        return mazeMasterList.get(mazeLevel - 1);
+        return mazeMasterList.get(mazeLevel - 1).getMaze();
     }
 }

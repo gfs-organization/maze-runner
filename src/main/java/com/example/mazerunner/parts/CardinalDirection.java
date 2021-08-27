@@ -41,6 +41,10 @@ public enum CardinalDirection {
     }
 
     public static CardinalDirection getByName(final String name) {
-        return lookup.get(name);
+        final CardinalDirection cardinalDirection = lookup.get(name);
+        if (cardinalDirection == null) {
+            throw new IllegalArgumentException("You passed in an invalid direction: " + name + " Please enter N, S, E, or W.");
+        }
+        return cardinalDirection;
     }
 }
