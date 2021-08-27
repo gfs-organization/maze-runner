@@ -1,4 +1,4 @@
-package com.example.mazerunner.parts;
+package com.example.mazerunner.navigation;
 
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;
@@ -8,6 +8,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.mazerunner.parts.CardinalDirection;
+import com.example.mazerunner.parts.Coordinates;
+import com.example.mazerunner.parts.FoundExitException;
+import com.example.mazerunner.parts.Maze;
+import com.example.mazerunner.parts.MazeMaster;
+import com.example.mazerunner.parts.MazeSpace;
+
 @Component
 public class MazeRunner {
 
@@ -16,20 +23,23 @@ public class MazeRunner {
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
         final MazeMaster mazeMaster = chooseTheMaze(mazeLevel);
-        System.out.println("Running the " + mazeMaster.getMazeTitle());
+        final Maze maze = mazeMaster.getMaze();
+
+        System.out.println("Running the " + maze.getMazeTitle());
         final Coordinates coordinates = new Coordinates();
 
-        MazeSpace lastSpace = OPEN_SPACE;
+        ;
         try {
             for (final String direction : directions) {
-                lastSpace = mazeMaster.step(direction, coordinates);
+                final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
+                final MazeSpace lastSpace = stepDirection.getStepper().step(maze, coordinates);
                 //                System.out.print("\"" + direction + "\",");
                 if (lastSpace == WALL) {
                     return WALL.getLongDescription();
                 }
             }
         } catch (final FoundExitException e) {
-            return mazeMaster.getSuccessMessage();
+            return maze.getSuccessMessage();
         }
 
         return OPEN_SPACE.getLongDescription();
