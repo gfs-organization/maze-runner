@@ -3,11 +3,11 @@ package com.example.mazerunner.parts;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.mazerunner.navigation.AbstractStepper;
-import com.example.mazerunner.navigation.EastStepper;
-import com.example.mazerunner.navigation.NorthStepper;
-import com.example.mazerunner.navigation.SouthStepper;
-import com.example.mazerunner.navigation.WestStepper;
+import com.example.mazerunner.navigation.steppers.AbstractStepper;
+import com.example.mazerunner.navigation.steppers.EastStepper;
+import com.example.mazerunner.navigation.steppers.NorthStepper;
+import com.example.mazerunner.navigation.steppers.SouthStepper;
+import com.example.mazerunner.navigation.steppers.WestStepper;
 
 public enum CardinalDirection {
 

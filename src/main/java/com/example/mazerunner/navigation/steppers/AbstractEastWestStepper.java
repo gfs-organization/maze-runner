@@ -1,4 +1,4 @@
-package com.example.mazerunner.navigation;
+package com.example.mazerunner.navigation.steppers;
 
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;

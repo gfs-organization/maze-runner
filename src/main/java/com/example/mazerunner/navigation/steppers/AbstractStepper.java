@@ -1,4 +1,4 @@
-package com.example.mazerunner.navigation;
+package com.example.mazerunner.navigation.steppers;
 
 import com.example.mazerunner.parts.Coordinates;
 import com.example.mazerunner.parts.FoundExitException;
