@@ -1,8 +1,12 @@
 package com.example.mazerunner;
 
+import static org.springframework.http.HttpStatus.OK;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,14 +25,14 @@ public final class MazeController {
 
     @CrossOrigin(origins = "*")
     @PutMapping("/{level}")
-    public String nextDirection(@RequestBody final List<String> directions, @PathVariable("level") final int mazeLevel) {
+    public ResponseEntity<String> nextDirection(@RequestBody final List<String> directions, @PathVariable("level") final int mazeLevel) {
         String message = "";
         try {
             message = mazeRunner.runTheMaze(mazeLevel, directions);
         } catch (final IllegalArgumentException ex) {
-            message = ex.getMessage();
+            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return message;
+        return new ResponseEntity(message, OK);
     }
 
 }

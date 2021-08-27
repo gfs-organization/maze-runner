@@ -1,4 +1,4 @@
-package com.example.mazerunner.navigation;
+package com.example.mazerunner.navigation.steppers;
 
 import static com.example.mazerunner.parts.MazeSpace.WALL;
 
@@ -7,15 +7,14 @@ import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeSpace;
 
-public class SouthStepper extends AbstractNorthSouthStepper {
+public class EastStepper extends AbstractEastWestStepper {
     @Override
     public MazeSpace step(final Maze maze, final Coordinates coordinates) throws FoundExitException {
-        final int currentRow = coordinates.getRow();
-        if (currentRow == maze.getMaxRowIndex()) {
+        if (coordinates.getColumn() == maze.getMaxColumnIndex()) {
             return WALL;
         }
 
-        final int newRowIndex = currentRow + 1;
-        return getNorthSouthMazeSpace(maze, coordinates, newRowIndex);
+        final int newColumn = coordinates.getColumn() + 1;
+        return getEastWestMazeSpace(maze, coordinates, newColumn);
     }
 }
