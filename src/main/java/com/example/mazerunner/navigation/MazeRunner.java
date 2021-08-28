@@ -20,6 +20,7 @@ public class MazeRunner {
 
     @Autowired
     private List<MazeMaster> mazeMasterList;
+    private static final String PASSCODE_MESSAGE = "Your secret passcode is ";
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
         final Maze maze = chooseTheMaze(mazeLevel);
@@ -38,7 +39,12 @@ public class MazeRunner {
                 }
             }
         } catch (final FoundExitException e) {
-            return maze.getSuccessMessage();
+            final char[] chars = String.join("", directions).toCharArray();
+            int code = 0;
+            for (final char c : chars) {
+                code += c;
+            }
+            return maze.getSuccessMessage() + PASSCODE_MESSAGE + (code * directions.size()) + ".";
         }
 
         return OPEN_SPACE.getLongDescription();

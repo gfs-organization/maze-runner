@@ -1,5 +1,5 @@
 The Snake
-You have successfully navigated 'The Snake'! Your secret passcode is 840011.
+You have successfully navigated 'The Snake'!
 ____W
 WWW_W
 W___W
