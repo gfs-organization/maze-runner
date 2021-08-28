@@ -15,7 +15,7 @@
         You have been dropped in a maze of unknown size and must find the exit. The maze is laid out in a grid pattern. You will
         always start in the NorthWest corner of the maze (position 0,0 of the grid). Your goal is to map the shortest path
         through the maze by sending directional coordinates for each step. You will take steps by passing in an array of
-        Strings, where each item in the array is one of 4 cardinal direction points: N, S, E, W.
+        Strings, where each item in the array is one of 4 cardinal directions (N, S, E, W), or 4 ordinal directions (NE, SE, SW, NW).
     </div>
     <div class="p-w">
         <ul>
@@ -23,6 +23,11 @@
             <li>S will take 1 step towards the bottom of the grid.</li>
             <li>E will... (If you can't figure out where East is now, don't start this challenge.)</li>
             <li>W (See the directions for East.)</li>
+            <li>NE will take you diagonally 1 step towards the top of the grid and 1 step right. This can technically squeeze between wall corners.
+            </li>
+            <li>SE will take you diagonally 1 step towards the bottom of the grid and 1 step right.</li>
+            <li>SW will take you diagonally 1 step towards the bottom of the grid and 1 step left.</li>
+            <li>NW will take you diagonally 1 step towards the top of the grid and 1 step left.</li>
         </ul>
     </div>
     <div class="p-2">
@@ -33,7 +38,7 @@
     <div class="p-2">
         Become a Runner in the Maze by sending a PUT request to:
         </br></br>https://gfs-maze-runner.herokuapp.com/mazerunner/{level}
-        </br>with JSON body: ["E", "S", "N", "W"]
+        </br>with JSON body: ["E", "S", "N", "W", "NE", "SE", "SW", "NW"]
     </div>
     <div class="p-2">
         There are 7 levels to this maze (1, 2, 3, 4, 5, 6, 7).
