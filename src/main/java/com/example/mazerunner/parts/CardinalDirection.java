@@ -15,14 +15,14 @@ import com.example.mazerunner.navigation.steppers.WestStepper;
 
 public enum CardinalDirection {
 
-    EAST("E", new EastStepper()),
-    SOUTH("S", new SouthStepper()),
     NORTH("N", new NorthStepper()),
+    EAST("E", new EastStepper()),
     WEST("W", new WestStepper()),
-    SOUTHWEST("SW", new SouthWestStepper()),
-    SOUTHEAST("SE", new SouthEastStepper()),
-    NORTHWEST("NW", new NorthWestStepper()),
+    SOUTH("S", new SouthStepper()),
     NORTHEAST("NE", new NorthEastStepper()),
+    SOUTHEAST("SE", new SouthEastStepper()),
+    SOUTHWEST("SW", new SouthWestStepper()),
+    NORTHWEST("NW", new NorthWestStepper()),
     ;
 
     private final String direction;
@@ -51,7 +51,12 @@ public enum CardinalDirection {
     public static CardinalDirection getByName(final String name) {
         final CardinalDirection cardinalDirection = lookup.get(name);
         if (cardinalDirection == null) {
-            throw new IllegalArgumentException("You passed in an invalid direction: " + name + " Please enter N, S, E, W, NE, NW, SE, SW.");
+            final StringBuilder error = new StringBuilder("You passed in an invalid direction: ").append(name).append(". Please enter ");
+            for (final CardinalDirection direction : CardinalDirection.values()) {
+                error.append(direction.getDirection()).append(", ");
+            }
+            error.replace(error.length() - 2, error.length() - 1, ".");
+            throw new IllegalArgumentException(error.toString());
         }
         return cardinalDirection;
     }
