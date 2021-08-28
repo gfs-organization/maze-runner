@@ -7,7 +7,7 @@ import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeSpace;
 
-public class NorthStepper extends AbstractNorthSouthStepper {
+public class NorthStepper extends AbstractStepper {
     @Override
     public MazeSpace step(final Maze maze, final Coordinates coordinates) throws FoundExitException {
         final int currentRow = coordinates.getRow();
@@ -16,6 +16,9 @@ public class NorthStepper extends AbstractNorthSouthStepper {
         }
 
         final int newRowIndex = currentRow - 1;
-        return getNorthSouthMazeSpace(maze, coordinates, newRowIndex);
+        final int newColumnIndex = coordinates.getColumn();
+        final char[] newRow = maze.getMazeMap().get(newRowIndex);
+
+        return getMazeSpace(newRow, coordinates, newRowIndex, newColumnIndex);
     }
 }
