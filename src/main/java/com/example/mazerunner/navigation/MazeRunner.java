@@ -28,7 +28,6 @@ public class MazeRunner {
         System.out.println("Running the " + maze.getMazeTitle());
         final Coordinates coordinates = new Coordinates();
 
-        ;
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
@@ -39,12 +38,7 @@ public class MazeRunner {
                 }
             }
         } catch (final FoundExitException e) {
-            final char[] chars = String.join("", directions).toCharArray();
-            int code = 0;
-            for (final char c : chars) {
-                code += c;
-            }
-            return maze.getSuccessMessage() + PASSCODE_MESSAGE + (code * directions.size()) + ".";
+            return buildSuccessMessage(directions, maze);
         }
 
         return OPEN_SPACE.getLongDescription();
@@ -59,4 +53,14 @@ public class MazeRunner {
 
         return mazeMasterList.get(mazeLevel - 1).getMaze();
     }
+
+    private String buildSuccessMessage(final List<String> directions, final Maze maze) {
+        final char[] chars = String.join("", directions).toCharArray();
+        int code = 0;
+        for (final char c : chars) {
+            code += c;
+        }
+        return maze.getSuccessMessage() + PASSCODE_MESSAGE + (code * directions.size()) + ".";
+    }
+
 }
