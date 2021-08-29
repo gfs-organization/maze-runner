@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.mazerunner.exceptions.FoundExitException;
+import com.example.mazerunner.exceptions.MazeException;
+import com.example.mazerunner.exceptions.WallException;
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Coordinates;
-import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeMaster;
 import com.example.mazerunner.parts.MazeSpace;
@@ -32,13 +34,13 @@ public class MazeRunner {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
                 final MazeSpace lastSpace = stepDirection.getStepper().step(maze, coordinates);
-                //                System.out.print("\"" + direction + "\",");
-                if (lastSpace == WALL) {
-                    return WALL.getLongDescription();
-                }
             }
         } catch (final FoundExitException e) {
             return buildSuccessMessage(directions, maze);
+        } catch (final WallException we) {
+            return WALL.getLongDescription();
+        } catch (final MazeException me) {
+            throw new IllegalArgumentException(me.getMessage());
         }
 
         return OPEN_SPACE.getLongDescription();
