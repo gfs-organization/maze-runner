@@ -1,18 +1,17 @@
 package com.example.mazerunner.navigation.steppers;
 
-import static com.example.mazerunner.parts.MazeSpace.WALL;
-
+import com.example.mazerunner.exceptions.MazeException;
+import com.example.mazerunner.exceptions.WallException;
 import com.example.mazerunner.parts.Coordinates;
-import com.example.mazerunner.parts.FoundExitException;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeSpace;
 
 public class NorthStepper extends AbstractStepper {
     @Override
-    public MazeSpace step(final Maze maze, final Coordinates coordinates) throws FoundExitException {
+    public MazeSpace step(final Maze maze, final Coordinates coordinates) throws MazeException {
         final int currentRow = coordinates.getRow();
         if (currentRow == 0) {
-            return WALL; // do not change coordinates
+            throw new WallException("You hit a wall");
         }
 
         final int newRowIndex = currentRow - 1;
