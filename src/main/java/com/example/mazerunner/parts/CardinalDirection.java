@@ -50,6 +50,7 @@ public enum CardinalDirection {
 
     public static CardinalDirection getByName(final String name) {
         final CardinalDirection cardinalDirection = lookup.get(name);
+        
         if (cardinalDirection == null) {
             final StringBuilder error = new StringBuilder("You passed in an invalid direction: ").append(name).append(". Please enter ");
             for (final CardinalDirection direction : CardinalDirection.values()) {
