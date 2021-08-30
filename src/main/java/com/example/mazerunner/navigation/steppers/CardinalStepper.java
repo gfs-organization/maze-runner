@@ -13,7 +13,7 @@ import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeSpace;
 
 @Component
-public class MasterStepper {
+public class CardinalStepper {
 
     static final char MAP_WALL = 'W';
     static final char MAP_OPEN_SPACE = '_';
