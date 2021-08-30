@@ -1,7 +1,6 @@
 package com.example.mazerunner.navigation;
 
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
-import static com.example.mazerunner.parts.MazeSpace.WALL;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.mazerunner.exceptions.FoundExitException;
 import com.example.mazerunner.exceptions.MazeException;
-import com.example.mazerunner.exceptions.WallException;
 import com.example.mazerunner.navigation.steppers.CardinalStepper;
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Coordinates;
@@ -33,23 +31,21 @@ public class MazeRunner {
 
         System.out.println("Running the " + maze.getMazeTitle());
         final Coordinates coordinates = new Coordinates();
+        MazeSpace lastSpace = OPEN_SPACE;
 
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
-                final MazeSpace lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
+                lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
             }
 
         } catch (final FoundExitException e) {
             return buildSuccessMessage(directions, maze);
-        } catch (final WallException we) {
-            return WALL.getLongDescription();
         } catch (final MazeException me) {
-            throw new IllegalArgumentException(me.getMessage());
+            return me.getMessage();
         }
 
-        return OPEN_SPACE.getLongDescription();
-
+        return lastSpace.getLongDescription();
     }
 
     private Maze chooseTheMaze(final int mazeLevel) {
@@ -58,7 +54,7 @@ public class MazeRunner {
             throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + mazeMasterMap.size());
         }
 
-        return mazeMaster.getMaze();
+        return mazeMaster.getMazes().get(1);
     }
 
     private String buildSuccessMessage(final List<String> directions, final Maze maze) {
