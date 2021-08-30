@@ -4,6 +4,7 @@ import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
 import static com.example.mazerunner.parts.MazeSpace.WALL;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ import com.example.mazerunner.parts.MazeSpace;
 public class MazeRunner {
 
     @Autowired
-    private List<MazeMaster> mazeMasterList;
+    private Map<Integer, MazeMaster> mazeMasterMap;
     private static final String PASSCODE_MESSAGE = "Your secret passcode is ";
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
@@ -48,12 +49,12 @@ public class MazeRunner {
     }
 
     private Maze chooseTheMaze(final int mazeLevel) {
-        final int numberOfMazes = mazeMasterList.size();
-        if (mazeLevel < 1 || mazeLevel > numberOfMazes) {
-            throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + numberOfMazes);
+        final MazeMaster mazeMaster = mazeMasterMap.get(mazeLevel);
+        if (mazeMaster == null) {
+            throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + mazeMasterMap.size());
         }
 
-        return mazeMasterList.get(mazeLevel - 1).getMaze();
+        return mazeMaster.getMaze();
     }
 
     private String buildSuccessMessage(final List<String> directions, final Maze maze) {
