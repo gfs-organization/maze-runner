@@ -1,8 +1,8 @@
 package com.example.mazerunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,16 +18,16 @@ public class Application {
     }
 
     @Bean
-    public List<MazeMaster> mazeMasterList() throws IOException {
-        final List<MazeMaster> mazeMasters = new ArrayList<>();
+    public Map<Integer, MazeMaster> mazeMasterList() throws IOException {
+        final Map<Integer, MazeMaster> mazeMasters = new HashMap<>();
 
-        mazeMasters.add(new MazeMaster("theSnake.txt"));
-        mazeMasters.add(new MazeMaster("theTrapper.txt"));
-        mazeMasters.add(new MazeMaster("theDrain.txt"));
-        mazeMasters.add(new MazeMaster("theCurl.txt"));
-        mazeMasters.add(new MazeMaster("theDoubleBack.txt"));
-        mazeMasters.add(new MazeMaster("theQuadrupleBypass.txt"));
-        mazeMasters.add(new MazeMaster("theSpellingBee.txt"));
+        mazeMasters.put(1, new MazeMaster("theSnake.txt"));
+        mazeMasters.put(2, new MazeMaster("theTrapper.txt"));
+        mazeMasters.put(3, new MazeMaster("theDrain.txt"));
+        mazeMasters.put(4, new MazeMaster("theCurl.txt"));
+        mazeMasters.put(5, new MazeMaster("theDoubleBack.txt"));
+        mazeMasters.put(6, new MazeMaster("theQuadrupleBypass.txt"));
+        mazeMasters.put(7, new MazeMaster("theSpellingBee.txt"));
 
         return mazeMasters;
     }
