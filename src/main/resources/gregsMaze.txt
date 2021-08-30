@@ -1,0 +1,9 @@
+Greg's Maze
+You have successfully navigated 'Greg's Maze'!
+_WWWWWWWWWWWW
+_W_________WW
+_W_WWWWWWW_WW
+___WWWWWWW_WW
+WW_W_W_W_WEWW
+WWW_W_W_W_WWW
+WWWWWWWWWWWWW
