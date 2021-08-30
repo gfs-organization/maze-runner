@@ -23,9 +23,18 @@ public class MasterStepper {
 
         final int newRowIndex = coordinates.getRow() + cardinalDirection.getStepRow();
         final int newColumnIndex = coordinates.getColumn() + cardinalDirection.getStepColumn();
+
+        checkIfSteppingOutsideMaze(maze, newRowIndex, newColumnIndex);
+
         final char[] newRow = maze.getMazeMap().get(newRowIndex);
 
         return getMazeSpace(newRow, coordinates, newRowIndex, newColumnIndex);
+    }
+
+    private void checkIfSteppingOutsideMaze(final Maze maze, final int newRowIndex, final int newColumnIndex) throws WallException {
+        if (newRowIndex < 0 || newRowIndex > maze.getMaxRowIndex() || newColumnIndex < 0 || newColumnIndex > maze.getMaxColumnIndex()) {
+            throw new WallException("You hit a wall.");
+        }
     }
 
     private MazeSpace getMazeSpace(final char[] newRow, final Coordinates coordinates, final int newRowIndex, final int newColumnIndex)
