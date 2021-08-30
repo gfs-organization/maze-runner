@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.example.mazerunner.exceptions.FoundExitException;
 import com.example.mazerunner.exceptions.MazeException;
 import com.example.mazerunner.exceptions.WallException;
+import com.example.mazerunner.navigation.steppers.MasterStepper;
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Coordinates;
 import com.example.mazerunner.parts.Maze;
@@ -23,6 +24,8 @@ public class MazeRunner {
 
     @Autowired
     private Map<Integer, MazeMaster> mazeMasterMap;
+    @Autowired
+    private MasterStepper masterStepper;
     private static final String PASSCODE_MESSAGE = "Your secret passcode is ";
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
@@ -34,8 +37,9 @@ public class MazeRunner {
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
-                final MazeSpace lastSpace = stepDirection.getStepper().step(maze, coordinates);
+                final MazeSpace lastSpace = masterStepper.doStep(maze, stepDirection, coordinates);
             }
+
         } catch (final FoundExitException e) {
             return buildSuccessMessage(directions, maze);
         } catch (final WallException we) {

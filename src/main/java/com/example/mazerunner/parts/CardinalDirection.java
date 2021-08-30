@@ -3,30 +3,21 @@ package com.example.mazerunner.parts;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.mazerunner.navigation.steppers.AbstractStepper;
-import com.example.mazerunner.navigation.steppers.EastStepper;
-import com.example.mazerunner.navigation.steppers.NorthEastStepper;
-import com.example.mazerunner.navigation.steppers.NorthStepper;
-import com.example.mazerunner.navigation.steppers.NorthWestStepper;
-import com.example.mazerunner.navigation.steppers.SouthEastStepper;
-import com.example.mazerunner.navigation.steppers.SouthStepper;
-import com.example.mazerunner.navigation.steppers.SouthWestStepper;
-import com.example.mazerunner.navigation.steppers.WestStepper;
-
 public enum CardinalDirection {
 
-    NORTH("N", new NorthStepper()),
-    EAST("E", new EastStepper()),
-    WEST("W", new WestStepper()),
-    SOUTH("S", new SouthStepper()),
-    NORTHEAST("NE", new NorthEastStepper()),
-    SOUTHEAST("SE", new SouthEastStepper()),
-    SOUTHWEST("SW", new SouthWestStepper()),
-    NORTHWEST("NW", new NorthWestStepper()),
+    NORTH("N", -1, 0),
+    EAST("E", 0, 1),
+    WEST("W", 0, -1),
+    SOUTH("S", 1, 0),
+    NORTHEAST("NE", -1, 1),
+    SOUTHEAST("SE", 1, 1),
+    SOUTHWEST("SW", 1, -1),
+    NORTHWEST("NW", -1, -1),
     ;
 
     private final String direction;
-    private final AbstractStepper stepper;
+    private final int stepRow;
+    private final int stepColumn;
     private static final Map<String, CardinalDirection> lookup = new HashMap<>();
 
     static {
@@ -35,22 +26,27 @@ public enum CardinalDirection {
         }
     }
 
-    CardinalDirection(final String direction, final AbstractStepper stepper) {
+    CardinalDirection(final String direction, final int stepRow, final int stepColumn) {
         this.direction = direction;
-        this.stepper = stepper;
+        this.stepRow = stepRow;
+        this.stepColumn = stepColumn;
     }
 
     public String getDirection() {
         return direction;
     }
 
-    public AbstractStepper getStepper() {
-        return stepper;
+    public int getStepRow() {
+        return stepRow;
+    }
+
+    public int getStepColumn() {
+        return stepColumn;
     }
 
     public static CardinalDirection getByName(final String name) {
         final CardinalDirection cardinalDirection = lookup.get(name);
-        
+
         if (cardinalDirection == null) {
             final StringBuilder error = new StringBuilder("You passed in an invalid direction: ").append(name).append(". Please enter ");
             for (final CardinalDirection direction : CardinalDirection.values()) {

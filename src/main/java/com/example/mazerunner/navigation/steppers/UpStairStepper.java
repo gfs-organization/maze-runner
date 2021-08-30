@@ -5,8 +5,7 @@ import com.example.mazerunner.parts.Coordinates;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeSpace;
 
-public class UpStairStepper extends AbstractStepper {
-    @Override
+public class UpStairStepper {
     public MazeSpace step(final Maze maze, final Coordinates coordinates) throws MazeException {
         return null;
     }
