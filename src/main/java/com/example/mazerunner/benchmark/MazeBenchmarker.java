@@ -22,26 +22,17 @@ public class MazeBenchmarker {
     @BenchmarkMode(Mode.AverageTime)
     public void benchmark_test() throws IOException, URISyntaxException {
 
-        final MazeMaster mazeMaster = new MazeMaster("theSnake.txt");
+        final MazeMaster mazeMaster = new MazeMaster("theEndlessLoop.txt");
         final Coordinates coordinates = new Coordinates();
-        final List<String> directions = Arrays.asList("S", "S", "E", "E", "N", "E", "E", "E", "S", "S", "E", "E", "S", "E", "E", "N", "N", "E", "E",
-                "E", "E", "S", "S", "S", "E", "E", "E", "E", "N", "N", "N", "E", "E", "S", "S", "S", "S", "S", "S", "S", "W", "W", "W", "W", "W", "W",
-                "W", "W", "S", "S", "E", "E", "E", "S", "S", "S", "S", "S", "S", "E", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "W", "N", "N",
-                "W", "N", "N", "E", "E", "E", "N", "N", "N", "N", "W", "W", "W", "W", "W", "W", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S",
-                "S", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N", "E", "E", "E", "E", "N", "E", "N", "N", "E", "E", "N", "N", "E", "E", "E",
-                "E", "S", "S", "S", "S", "S", "S", "E", "E", "E", "E", "E", "N", "N", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N",
-                "N", "W", "N", "N", "N", "N", "N", "N", "W", "W", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E", "E", "N", "N", "N", "N", "N", "N",
-                "N", "N", "E", "E", "S", "E", "E", "N", "E", "E", "E", "S", "S", "E", "E", "S", "E", "E", "N", "N", "E", "E", "E", "E", "S", "S", "S",
-                "E", "E", "E", "E", "N", "N", "N", "E", "E", "S", "S", "S", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "S", "S", "S", "S", "E",
-                "E", "E", "S", "S", "S", "S", "S", "S", "E", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "W", "S", "S", "E", "S", "S", "E", "E",
-                "E", "E", "E", "N", "E", "E", "E", "E", "S", "E", "E", "E", "N", "N", "E", "N", "E", "N", "E", "E", "N", "N", "N", "N", "N", "N", "N",
-                "N", "E", "E", "E", "E", "E", "E", "N", "N", "E", "N", "E", "N", "N", "N", "N", "N", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E",
-                "N");
-        for (final String direction : directions) {
-            try {
-                mazeMaster.step(direction, coordinates);
-            } catch (final FoundExitException e) {
-                //                System.out.println(e.getMessage());
+        final List<String> directions = Arrays.asList("E", "E", "E", "E", "S", "S", "S", "S", "W", "W", "W", "W", "N", "N", "N", "N");
+        for (int i = 0; i < 100000; i++) {
+
+            for (final String direction : directions) {
+                try {
+                    mazeMaster.step(direction, coordinates);
+                } catch (final FoundExitException e) {
+                    //                System.out.println(e.getMessage());
+                }
             }
         }
     }
