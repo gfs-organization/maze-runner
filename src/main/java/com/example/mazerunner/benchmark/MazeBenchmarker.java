@@ -24,7 +24,8 @@ public class MazeBenchmarker {
 
         final MazeMaster mazeMaster = new MazeMaster("theEndlessLoop.txt");
         final Coordinates coordinates = new Coordinates();
-        final List<String> directions = Arrays.asList("E", "E", "E", "E", "S", "S", "S", "S", "W", "W", "W", "W", "N", "N", "N", "N");
+        final List<String> directions = Arrays.asList("E", "E", "E", "E", "E", "S", "S", "S", "S", "W", "W", "W", "W", "W", "N", "N", "N", "N");
+        
         for (int i = 0; i < 100000; i++) {
 
             for (final String direction : directions) {
