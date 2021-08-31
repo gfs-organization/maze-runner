@@ -67,13 +67,15 @@ public class MazeMaster {
     }
 
     public MazeSpace step(final String direction, final Coordinates coordinates) throws FoundExitException {
-        if (direction.equals(EAST.getDirection())) {
+        final CardinalDirection cardinalDirection = CardinalDirection.getByName(direction);
+
+        if (cardinalDirection == EAST) {
             return stepEast(coordinates);
-        } else if (direction.equals(WEST.getDirection())) {
+        } else if (cardinalDirection == WEST) {
             return stepWest(coordinates);
-        } else if (direction.equals(NORTH.getDirection())) {
+        } else if (cardinalDirection == NORTH) {
             return stepNorth(coordinates);
-        } else if (direction.equals(SOUTH.getDirection())) {
+        } else if (cardinalDirection == SOUTH) {
             return stepSouth(coordinates);
         } else {
             throw new IllegalArgumentException("An invalid direction of " + direction + " was sent.");
