@@ -47,6 +47,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -86,7 +90,20 @@
                     </processTypes>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <mainClass>com.example.mazerunner.benchmark.BenchmarkRunner</mainClass>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>java.class.path</key>
+                            <value>${project.build.outputDirectory}${path.separator}${depClasspath}</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
