@@ -24,12 +24,24 @@ public class MazeBenchmarker {
 
         final MazeMaster mazeMaster = new MazeMaster("theSnake.txt");
         final Coordinates coordinates = new Coordinates();
-        final List<String> directions = Arrays.asList("E", "E", "S", "E", "S", "W", "S", "W", "S", "E", "E", "S");
+        final List<String> directions = Arrays.asList("S", "S", "E", "E", "N", "E", "E", "E", "S", "S", "E", "E", "S", "E", "E", "N", "N", "E", "E",
+                "E", "E", "S", "S", "S", "E", "E", "E", "E", "N", "N", "N", "E", "E", "S", "S", "S", "S", "S", "S", "S", "W", "W", "W", "W", "W", "W",
+                "W", "W", "S", "S", "E", "E", "E", "S", "S", "S", "S", "S", "S", "E", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "W", "N", "N",
+                "W", "N", "N", "E", "E", "E", "N", "N", "N", "N", "W", "W", "W", "W", "W", "W", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S", "S",
+                "S", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N", "E", "E", "E", "E", "N", "E", "N", "N", "E", "E", "N", "N", "E", "E", "E",
+                "E", "S", "S", "S", "S", "S", "S", "E", "E", "E", "E", "E", "N", "N", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N",
+                "N", "W", "N", "N", "N", "N", "N", "N", "W", "W", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E", "E", "N", "N", "N", "N", "N", "N",
+                "N", "N", "E", "E", "S", "E", "E", "N", "E", "E", "E", "S", "S", "E", "E", "S", "E", "E", "N", "N", "E", "E", "E", "E", "S", "S", "S",
+                "E", "E", "E", "E", "N", "N", "N", "E", "E", "S", "S", "S", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "S", "S", "S", "S", "E",
+                "E", "E", "S", "S", "S", "S", "S", "S", "E", "S", "S", "W", "W", "W", "W", "W", "W", "W", "W", "W", "S", "S", "E", "S", "S", "E", "E",
+                "E", "E", "E", "N", "E", "E", "E", "E", "S", "E", "E", "E", "N", "N", "E", "N", "E", "N", "E", "E", "N", "N", "N", "N", "N", "N", "N",
+                "N", "E", "E", "E", "E", "E", "E", "N", "N", "E", "N", "E", "N", "N", "N", "N", "N", "W", "N", "N", "E", "E", "E", "E", "E", "E", "E",
+                "N");
         for (final String direction : directions) {
             try {
                 mazeMaster.step(direction, coordinates);
             } catch (final FoundExitException e) {
-                System.out.println(e.getMessage());
+                //                System.out.println(e.getMessage());
             }
         }
     }
