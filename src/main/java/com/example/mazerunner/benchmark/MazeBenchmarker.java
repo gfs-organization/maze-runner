@@ -28,7 +28,7 @@ public class MazeBenchmarker {
     public void benchmark_test() throws IOException, URISyntaxException {
 
         final MazeMaster mazeMaster = new MazeMaster("theEndlessLoop.txt");
-        final Maze maze = mazeMaster.getMaze();
+        final Maze maze = mazeMaster.getMazes().get(0);
         final CardinalStepper cardinalStepper = new CardinalStepper();
         final Coordinates coordinates = new Coordinates();
         final List<String> directions = Arrays.asList("E", "E", "E", "E", "E", "S", "S", "S", "S", "W", "W", "W", "W", "W", "N", "N", "N", "N");
