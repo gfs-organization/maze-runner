@@ -4,6 +4,8 @@ public enum MazeSpace {
     WALL("W", "Wall"),
     OPEN_SPACE("_", "Open Space"),
     EXIT("E", "Exit"),
+    UP_STAIRS("U", "Stairs Up"),
+    DOWN_STAIRS("D", "Stairs Down"),
     ;
 
     private final String shortDescription;

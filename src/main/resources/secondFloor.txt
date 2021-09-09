@@ -1,0 +1,12 @@
+Second Floor
+You have successfully navigated 'The Second Floor'!
+D_WWWWWWWW
+W__WWWWWWW
+WW__WWWWWW
+WWW__WWWWW
+___W__WWWW
+_W_WW__WWW
+_W_WWW__WW
+_WEWWWW__W
+__WWWWWW_W
+W________W

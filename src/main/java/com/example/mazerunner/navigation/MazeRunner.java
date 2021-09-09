@@ -1,7 +1,10 @@
 package com.example.mazerunner.navigation;
 
+import static com.example.mazerunner.parts.CardinalDirection.DOWN;
+import static com.example.mazerunner.parts.CardinalDirection.UP;
+import static com.example.mazerunner.parts.MazeSpace.DOWN_STAIRS;
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
-import static com.example.mazerunner.parts.MazeSpace.WALL;
+import static com.example.mazerunner.parts.MazeSpace.UP_STAIRS;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.mazerunner.exceptions.FoundExitException;
 import com.example.mazerunner.exceptions.MazeException;
-import com.example.mazerunner.exceptions.WallException;
 import com.example.mazerunner.navigation.steppers.CardinalStepper;
 import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Coordinates;
@@ -29,36 +31,44 @@ public class MazeRunner {
     private static final String PASSCODE_MESSAGE = "Your secret passcode is ";
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
-        final Maze maze = chooseTheMaze(mazeLevel);
+        final Map<Integer, Maze> mazes = chooseTheMazes(mazeLevel);
+        int floor = 0;
+        Maze maze = mazes.get(floor);
 
         System.out.println("Running the " + maze.getMazeTitle());
-        final Coordinates coordinates = new Coordinates();
+        Coordinates coordinates = new Coordinates();
+        MazeSpace lastSpace = OPEN_SPACE;
 
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
-                final MazeSpace lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
+                if (lastSpace == UP_STAIRS && stepDirection == UP) {
+                    coordinates = new Coordinates();
+                    maze = mazes.get(++floor);
+                } else if (lastSpace == DOWN_STAIRS && stepDirection == DOWN) {
+                    coordinates = new Coordinates();
+                    maze = mazes.get(++floor);
+                }
+
+                lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
             }
 
         } catch (final FoundExitException e) {
             return buildSuccessMessage(directions, maze);
-        } catch (final WallException we) {
-            return WALL.getLongDescription();
         } catch (final MazeException me) {
-            throw new IllegalArgumentException(me.getMessage());
+            return me.getMessage();
         }
 
-        return OPEN_SPACE.getLongDescription();
-
+        return lastSpace.getLongDescription();
     }
 
-    private Maze chooseTheMaze(final int mazeLevel) {
+    private Map<Integer, Maze> chooseTheMazes(final int mazeLevel) {
         final MazeMaster mazeMaster = mazeMasterMap.get(mazeLevel);
         if (mazeMaster == null) {
             throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + mazeMasterMap.size());
         }
 
-        return mazeMaster.getMaze();
+        return mazeMaster.getMazes();
     }
 
     private String buildSuccessMessage(final List<String> directions, final Maze maze) {
