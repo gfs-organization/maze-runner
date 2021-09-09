@@ -13,6 +13,8 @@ public enum CardinalDirection {
     SOUTHEAST("SE", 1, 1),
     SOUTHWEST("SW", 1, -1),
     NORTHWEST("NW", -1, -1),
+    UP("U", 0, 0),
+    DOWN("D", 0, 0),
     ;
 
     private final String direction;

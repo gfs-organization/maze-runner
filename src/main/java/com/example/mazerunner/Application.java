@@ -30,6 +30,8 @@ public class Application {
         mazeMasters.put(7, new MazeMaster("theSpellingBee.txt"));
         mazeMasters.put(8, new MazeMaster("gregsMaze.txt"));
 
+        mazeMasters.put(9, new MazeMaster("firstFloor.txt", "secondFloor.txt"));
+
         return mazeMasters;
     }
 

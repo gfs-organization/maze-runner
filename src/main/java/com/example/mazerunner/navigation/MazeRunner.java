@@ -1,6 +1,10 @@
 package com.example.mazerunner.navigation;
 
+import static com.example.mazerunner.parts.CardinalDirection.DOWN;
+import static com.example.mazerunner.parts.CardinalDirection.UP;
+import static com.example.mazerunner.parts.MazeSpace.DOWN_STAIRS;
 import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
+import static com.example.mazerunner.parts.MazeSpace.UP_STAIRS;
 
 import java.util.List;
 import java.util.Map;
@@ -27,15 +31,25 @@ public class MazeRunner {
     private static final String PASSCODE_MESSAGE = "Your secret passcode is ";
 
     public String runTheMaze(final int mazeLevel, final List<String> directions) {
-        final Maze maze = chooseTheMaze(mazeLevel);
+        final Map<Integer, Maze> mazes = chooseTheMazes(mazeLevel);
+        int floor = 0;
+        Maze maze = mazes.get(floor);
 
         System.out.println("Running the " + maze.getMazeTitle());
-        final Coordinates coordinates = new Coordinates();
+        Coordinates coordinates = new Coordinates();
         MazeSpace lastSpace = OPEN_SPACE;
 
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
+                if (lastSpace == UP_STAIRS && stepDirection == UP) {
+                    coordinates = new Coordinates();
+                    maze = mazes.get(++floor);
+                } else if (lastSpace == DOWN_STAIRS && stepDirection == DOWN) {
+                    coordinates = new Coordinates();
+                    maze = mazes.get(++floor);
+                }
+
                 lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
             }
 
@@ -48,13 +62,13 @@ public class MazeRunner {
         return lastSpace.getLongDescription();
     }
 
-    private Maze chooseTheMaze(final int mazeLevel) {
+    private Map<Integer, Maze> chooseTheMazes(final int mazeLevel) {
         final MazeMaster mazeMaster = mazeMasterMap.get(mazeLevel);
         if (mazeMaster == null) {
             throw new IllegalArgumentException("You did not enter a valid maze level. Please enter a number between 1 and " + mazeMasterMap.size());
         }
 
-        return mazeMaster.getMazes().get(1);
+        return mazeMaster.getMazes();
     }
 
     private String buildSuccessMessage(final List<String> directions, final Maze maze) {

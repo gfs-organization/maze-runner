@@ -21,9 +21,8 @@ public class MazeMaster {
 
         mazes = new HashMap<>();
 
-        for (final String commandFileName : commandFileNames) {
-
-            try (final InputStream inputStream = new ClassPathResource(commandFileName).getInputStream();
+        for (int x = 0; x < commandFileNames.length; x++) {
+            try (final InputStream inputStream = new ClassPathResource(commandFileNames[x]).getInputStream();
                     final Stream<String> lines = new BufferedReader(new InputStreamReader(inputStream)).lines()) {
 
                 final Maze maze = new Maze();
@@ -35,7 +34,7 @@ public class MazeMaster {
                 rows.remove(0); // remove success message
 
                 buildMaze(maze, rows);
-                mazes.put(1, maze);
+                mazes.put(x, maze);
             }
         }
     }
