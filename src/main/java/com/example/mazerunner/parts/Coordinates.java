@@ -3,7 +3,14 @@ package com.example.mazerunner.parts;
 public class Coordinates {
     private int row;
     private int column;
-    private int floor;
+
+    public Coordinates() {
+    }
+
+    public Coordinates(final int row, final int column) {
+        this.row = row;
+        this.column = column;
+    }
 
     public int getRow() {
         return row;
@@ -21,11 +28,4 @@ public class Coordinates {
         this.column = column;
     }
 
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(final int floor) {
-        this.floor = floor;
-    }
 }

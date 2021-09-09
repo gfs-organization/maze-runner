@@ -42,15 +42,18 @@ public class MazeRunner {
         try {
             for (final String direction : directions) {
                 final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
+                
                 if (lastSpace == UP_STAIRS && stepDirection == UP) {
-                    coordinates = new Coordinates();
                     maze = mazes.get(++floor);
+                    System.out.println("Went upstairs to the " + maze.getMazeTitle());
+                    coordinates = maze.getStairsDown();
                 } else if (lastSpace == DOWN_STAIRS && stepDirection == DOWN) {
-                    coordinates = new Coordinates();
-                    maze = mazes.get(++floor);
+                    maze = mazes.get(--floor);
+                    System.out.println("Went downstairs to the " + maze.getMazeTitle());
+                    coordinates = maze.getStairsUp();
+                } else {
+                    lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
                 }
-
-                lastSpace = cardinalStepper.doStep(maze, stepDirection, coordinates);
             }
 
         } catch (final FoundExitException e) {

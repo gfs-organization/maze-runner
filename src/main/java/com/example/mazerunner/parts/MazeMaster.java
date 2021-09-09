@@ -43,10 +43,19 @@ public class MazeMaster {
         final List<char[]> levelMap = new ArrayList<>(rows.size());
         int maxColumnIndex = 0;
 
-        for (final String row : rows) {
+        for (int x = 0; x < rows.size(); x++) {
+            final String row = rows.get(x);
             final char[] cells = row.toCharArray();
             levelMap.add(cells);
 
+            int stairs = row.indexOf("U");
+            if (stairs > -1) {
+                maze.setStairsUp(new Coordinates(x, stairs));
+            }
+            stairs = row.indexOf("D");
+            if (stairs > -1) {
+                maze.setStairsDown(new Coordinates(x, stairs));
+            }
             maxColumnIndex = Math.max(maxColumnIndex, cells.length - 1);
         }
 
