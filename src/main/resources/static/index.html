@@ -17,6 +17,10 @@
         through the maze by sending directional coordinates for each step. You will take steps by passing in an array of
         Strings, where each item in the array is one of 4 cardinal directions (N, S, E, W), or 4 ordinal directions (NE, SE, SW, NW).
     </div>
+    <div class="p-2">
+        At maze 9 you will encounter stairs to other levels. To climb up stairs, you send 'U', to climb down stairs, you send 'D'. You will also start
+        encountering coins. Find as many coins as possible before exiting.
+    </div>
     <div class="p-w">
         <ul>
             <li>N will take 1 step towards the top of the grid.</li>
@@ -28,12 +32,14 @@
             <li>SE will take you diagonally 1 step towards the bottom of the grid and 1 step right.</li>
             <li>SW will take you diagonally 1 step towards the bottom of the grid and 1 step left.</li>
             <li>NW will take you diagonally 1 step towards the top of the grid and 1 step left.</li>
+            <li>U will walk you up stairs to the next upper level.</li>
+            <li>D will walk you donw stairs to the next lower level</li>
         </ul>
     </div>
     <div class="p-2">
-        Each set of directions will return a String indicating you have hit a "Wall" or "Open Space" or "Exit". If you hit an
-        open space, you have moved to that space. If you hit "Exit" you are done, and you will receive a success message with
-        your Secret Code.
+        Each set of directions will return a String indicating you have hit a "Wall" or "Open Space" or "Exit" or a coin. If you hit an
+        open space or a coin you have moved to that space. If you hit the coin, you have collected it. No separate command is necessary.
+        If you hit "Exit" you are done, and you will receive a success message with your Secret Code.
     </div>
     <div class="p-2">
         Become a Runner in the Maze by sending a PUT request to:
@@ -41,7 +47,7 @@
         </br>with JSON body: ["E", "S", "N", "W", "NE", "SE", "SW", "NW"]
     </div>
     <div class="p-2">
-        There are 7 levels to this maze (1, 2, 3, 4, 5, 6, 7).
+        There are 9 levels to this maze (1, 2, 3 ... 9).
         </br></br>You may submit your solution to each level as you find it. Please submit your complete list of
         directions plus your secret code for each maze.
     </div>
@@ -50,8 +56,8 @@
         <ol>
             <li>The exit can be anywhere in the grid. Even the middle.</li>
             <li>The grid is not necessarily a square.</li>
-            <li>You can use Postman or SoapUI to test submissions and responses.
-            </li>
+            <li>You can use Postman or SoapUI to test submissions and responses.</li>
+            <li>When you climb up or down stairs, you will not necessarily be at position (0, 0) on the new level.</li>
         </ol>
     </div>
     <div class="p-2">
