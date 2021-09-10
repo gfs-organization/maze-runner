@@ -6,6 +6,9 @@ public enum MazeSpace {
     EXIT("E", "Exit"),
     UP_STAIRS("U", "Stairs Up"),
     DOWN_STAIRS("D", "Stairs Down"),
+    COPPER_PIECE("C", "Copper Piece"),
+    SILVER_PIECE("S", "Silver Piece"),
+    GOLD_PIECE("G", "Gold Piece"),
     ;
 
     private final String shortDescription;

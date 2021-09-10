@@ -1,6 +1,6 @@
 Second Floor
-You have successfully navigated 'The Second Floor'!
-W_WWWWWWWW
+You have successfully navigated 'The Multilevel One'!
+WGWWWWWWWW
 W__WWWWWWW
 WW__WWWWWW
 WWW__WWWWW
@@ -9,4 +9,4 @@ _W_WW__WWW
 _W_WWW__WW
 _WEWWWW__W
 __WWWWWW_W
-W_______UW
+W_S_____UW

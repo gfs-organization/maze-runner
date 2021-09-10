@@ -16,6 +16,9 @@ import org.springframework.core.io.ClassPathResource;
 public class MazeMaster {
 
     private final Map<Integer, Maze> mazes;
+    private int goldPieces;
+    private int silverPieces;
+    private int copperPieces;
 
     public MazeMaster(final String... commandFileNames) throws IOException {
 
@@ -48,14 +51,20 @@ public class MazeMaster {
             final char[] cells = row.toCharArray();
             levelMap.add(cells);
 
-            int stairs = row.indexOf("U");
-            if (stairs > -1) {
-                maze.setStairsUp(new Coordinates(x, stairs));
+            for (int columnIndex = 0; columnIndex < cells.length; columnIndex++) {
+                if (cells[columnIndex] == 'U') {
+                    maze.setStairsUp(new Coordinates(x, columnIndex));
+                } else if (cells[columnIndex] == 'D') {
+                    maze.setStairsDown(new Coordinates(x, columnIndex));
+                } else if (cells[columnIndex] == 'G') {
+                    this.goldPieces++;
+                } else if (cells[columnIndex] == 'S') {
+                    this.silverPieces++;
+                } else if (cells[columnIndex] == 'C') {
+                    this.copperPieces++;
+                }
             }
-            stairs = row.indexOf("D");
-            if (stairs > -1) {
-                maze.setStairsDown(new Coordinates(x, stairs));
-            }
+
             maxColumnIndex = Math.max(maxColumnIndex, cells.length - 1);
         }
 
@@ -67,4 +76,17 @@ public class MazeMaster {
     public Map<Integer, Maze> getMazes() {
         return mazes;
     }
+
+    public int getGoldPieces() {
+        return goldPieces;
+    }
+
+    public int getSilverPieces() {
+        return silverPieces;
+    }
+
+    public int getCopperPieces() {
+        return copperPieces;
+    }
+
 }
