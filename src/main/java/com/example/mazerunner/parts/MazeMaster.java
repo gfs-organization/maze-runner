@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,14 +13,14 @@ import org.springframework.core.io.ClassPathResource;
 
 public class MazeMaster {
 
-    private final Map<Integer, Maze> mazes;
+    private final List<Maze> mazes;
     private int goldPieces;
     private int silverPieces;
     private int copperPieces;
 
     public MazeMaster(final String... commandFileNames) throws IOException {
 
-        mazes = new HashMap<>();
+        mazes = new ArrayList<>();
 
         for (int x = 0; x < commandFileNames.length; x++) {
             try (final InputStream inputStream = new ClassPathResource(commandFileNames[x]).getInputStream();
@@ -37,7 +35,7 @@ public class MazeMaster {
                 rows.remove(0); // remove success message
 
                 buildMaze(maze, rows);
-                mazes.put(x, maze);
+                mazes.add(maze);
             }
         }
     }
@@ -73,7 +71,7 @@ public class MazeMaster {
         maze.setMaxColumnIndex(maxColumnIndex);
     }
 
-    public Map<Integer, Maze> getMazes() {
+    public List<Maze> getMazes() {
         return mazes;
     }
 

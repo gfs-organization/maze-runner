@@ -50,13 +50,17 @@ public enum CardinalDirection {
         final CardinalDirection cardinalDirection = lookup.get(name);
 
         if (cardinalDirection == null) {
-            final StringBuilder error = new StringBuilder("You passed in an invalid direction: ").append(name).append(". Please enter ");
-            for (final CardinalDirection direction : CardinalDirection.values()) {
-                error.append(direction.getDirection()).append(", ");
-            }
-            error.replace(error.length() - 2, error.length() - 1, ".");
-            throw new IllegalArgumentException(error.toString());
+            throwAnError(name);
         }
         return cardinalDirection;
+    }
+
+    private static void throwAnError(final String name) {
+        final StringBuilder error = new StringBuilder("You passed in an invalid direction: ").append(name).append(". Please enter ");
+        for (final CardinalDirection direction : CardinalDirection.values()) {
+            error.append(direction.getDirection()).append(", ");
+        }
+        error.replace(error.length() - 2, error.length() - 1, ".");
+        throw new IllegalArgumentException(error.toString());
     }
 }

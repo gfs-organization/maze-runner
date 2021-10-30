@@ -1,5 +1,7 @@
 package com.example.mazerunner.benchmark;
 
+import static com.example.mazerunner.parts.MazeSpace.OPEN_SPACE;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import com.example.mazerunner.parts.CardinalDirection;
 import com.example.mazerunner.parts.Coordinates;
 import com.example.mazerunner.parts.Maze;
 import com.example.mazerunner.parts.MazeMaster;
+import com.example.mazerunner.parts.SpriteState;
 
 public class MazeBenchmarker {
 
@@ -28,16 +31,22 @@ public class MazeBenchmarker {
     public void benchmark_test() throws IOException, URISyntaxException {
 
         final MazeMaster mazeMaster = new MazeMaster("theEndlessLoop.txt");
+
+        final SpriteState spriteState = new SpriteState();
+        spriteState.setMazes(mazeMaster.getMazes());
+        spriteState.setCurrentFloor(0);
+        spriteState.setCurrentSpace(OPEN_SPACE);
+        
         final Maze maze = mazeMaster.getMazes().get(0);
         final CardinalStepper cardinalStepper = new CardinalStepper();
         final Coordinates coordinates = new Coordinates();
         final List<String> directions = Arrays.asList("E", "E", "E", "E", "E", "S", "S", "S", "S", "W", "W", "W", "W", "W", "N", "N", "N", "N");
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 5000000; i++) {
             try {
                 for (final String direction : directions) {
                     final CardinalDirection stepDirection = CardinalDirection.getByName(direction);
-                    cardinalStepper.doStep(maze, stepDirection, coordinates);
+                    cardinalStepper.doStep(spriteState, stepDirection);
                 }
 
             } catch (final FoundExitException e) {
