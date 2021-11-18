@@ -55,12 +55,18 @@ public class MazeRunner {
     }
 
     private MazeMaster chooseTheMazes(final int mazeLevel) {
-        final String treatment = splitClient.getTreatment("brentt.smith", "multiple-floors");
+        final String splitUser = "brentt.smith";
+//        final String treatmentName = "multiple-floors";
+        final String treatmentName = "bsmith_test";
+
+        final String treatment = splitClient.getTreatment(splitUser, treatmentName);
         final boolean multipleFloorsAllowed = treatment.equals("on");
 
         if (mazeLevel > LAST_SINGLE_LEVEL && !multipleFloorsAllowed) {
             throw new IllegalArgumentException("Levels with multiple floors have not been turned on. Please try a level below 9.");
         }
+
+        splitClient.track("brentt.smith@split.io", "user", "Running-Level", mazeLevel);
 
         final MazeMaster mazeMaster = mazeMasterMap.get(mazeLevel);
         if (mazeMaster == null) {

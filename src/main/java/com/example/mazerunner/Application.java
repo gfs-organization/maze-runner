@@ -19,6 +19,10 @@ import io.split.client.SplitFactoryBuilder;
 @SpringBootApplication
 public class Application {
 
+    private static final String SPIT_API_KEY = "8qm4hdpqnufit0rhruu1ar8a24b6jcvr7jdb"; // staging
+    //private static final String SPIT_API_KEY = "hqcsjesdq8iuk56kps9f28hlr2v2smvikdgv"; // personal
+
+
     public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -43,8 +47,16 @@ public class Application {
 
     @Bean
     public SplitClient splitClient() throws IOException, URISyntaxException {
-        final SplitClientConfig config = SplitClientConfig.builder().setBlockUntilReadyTimeout(10000).build();
-        final SplitFactory splitFactory = SplitFactoryBuilder.build("hqcsjesdq8iuk56kps9f28hlr2v2smvikdgv", config);
+        //@formatter:off
+        final SplitClientConfig config = SplitClientConfig.builder()
+                .endpoint("https://sdk.split-stage.io","https://events.split-stage.io")
+                .authServiceURL("https://auth.split-stage.io/api/auth")
+                .telemetryURL("https://telemetry.split-stage.io/api/v1")
+                .setBlockUntilReadyTimeout(10000)
+                .build();
+        //@formatter:on
+
+        final SplitFactory splitFactory = SplitFactoryBuilder.build(SPIT_API_KEY, config);
         final SplitClient client = splitFactory.client();
         try {
             client.blockUntilReady();
