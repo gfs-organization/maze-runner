@@ -46,10 +46,10 @@ jobs:
           arguments: build
       - uses: actions/upload-artifact@v3
         with:
-          name: Package
+          name: Jar
           path: build/libs
       - name: Create Release
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew -Prelease.useLastTag=true -Prelease.scope=patch final
+        run: ./gradlew -Prelease.version=1.0.0 final
