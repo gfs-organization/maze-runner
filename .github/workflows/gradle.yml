@@ -52,4 +52,4 @@ jobs:
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew release -Prelease.stage=final -Prelease.scope=minor
+        run: ./gradlew final
