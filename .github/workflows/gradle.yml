@@ -52,4 +52,4 @@ jobs:
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew -Prelease.version=1.0.0 final
+        run: ./gradlew -Prelease.useLastTag=true final
