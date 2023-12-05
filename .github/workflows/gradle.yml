@@ -48,13 +48,8 @@ jobs:
         with:
           name: Jar
           path: build/libs
-      - name: Create Tag
-        id: create_tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew -Prelease.useLastTag=true release
       - name: Create Release
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew -Prelease.useLastTag=true final
+        run: ./gradlew final
